@@ -1,7 +1,7 @@
 #note this package is not prefixable
 %define	name	ctags
 %define version 5.6
-%define release %mkrel 3
+%define release %mkrel 4
 
 Summary:	Generates an index (or "tag") file for objects found in source files.
 Name:		%{name}
@@ -9,7 +9,7 @@ Version:	%{version}
 Release:	%{release}
 URL:		http://ctags.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/ctags/%{name}-%{version}.tar.bz2
-License:	GPL
+License:	GPL+
 Group:		Development/Other
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -45,7 +45,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 update-alternatives --install %_bindir/ctags ctags %_bindir/exuberant-ctags 10 \
-                    --slave %_mandir/man1/ctags.1.bz2 ctags.1.bz2 %_mandir/man1/exuberant-ctags.1.bz2
+                    --slave %_mandir/man1/ctags.1%{_extension} ctags.1%{_extension} %_mandir/man1/exuberant-ctags.1%{_extension}
 
 %postun
 [ $1 = 0 ] || exit 0
@@ -55,6 +55,5 @@ update-alternatives --remove ctags %_bindir/exuberant-ctags
 %defattr(-,root,root)
 %_bindir/exuberant-ctags
 %_mandir/man1/exuberant-ctags.1*
-%doc COPYING EXTENDING.html FAQ NEWS README ctags.html
-
+%doc EXTENDING.html FAQ NEWS README ctags.html
 
