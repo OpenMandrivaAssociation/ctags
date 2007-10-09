@@ -3,7 +3,7 @@
 %define version 5.6
 %define release %mkrel 4
 
-Summary:	Generates an index (or "tag") file for objects found in source files.
+Summary:	Generates an index (or "tag") file for objects found in source files
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
