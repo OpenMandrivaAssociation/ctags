@@ -11,6 +11,7 @@ URL:		http://ctags.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/ctags/%{name}-%{version}.tar.bz2
 License:	GPL+
 Group:		Development/Other
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 The ctags program generate an index (or "tag") file for a variety of
