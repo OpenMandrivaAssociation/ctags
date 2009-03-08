@@ -9,6 +9,7 @@ Version:	%{version}
 Release:	%{release}
 URL:		http://ctags.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/ctags/%{name}-%{version}.tar.bz2
+Patch0:		ctags-5.7-fix-str-fmt.patch
 License:	GPL+
 Group:		Development/Other
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -26,22 +27,23 @@ a set of language files.
 
 %prep
 %setup -q
+%patch0 -p0
 # fix permission for %doc
 chmod a+r ctags.html
 
 %build
-%configure --disable-etags --enable-tmpdir=/tmp
+%configure2_5x --disable-etags --enable-tmpdir=/tmp
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall
 
-mv $RPM_BUILD_ROOT/%_bindir/ctags $RPM_BUILD_ROOT/%_bindir/exuberant-ctags
-mv $RPM_BUILD_ROOT/%_mandir/man1/ctags.1 $RPM_BUILD_ROOT/%_mandir/man1/exuberant-ctags.1
+mv %{buildroot}/%_bindir/ctags %{buildroot}/%_bindir/exuberant-ctags
+mv %{buildroot}/%_mandir/man1/ctags.1 %{buildroot}/%_mandir/man1/exuberant-ctags.1
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post
 update-alternatives --install %_bindir/ctags ctags %_bindir/exuberant-ctags 10 \
