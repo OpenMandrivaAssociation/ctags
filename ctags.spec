@@ -1,7 +1,7 @@
 #note this package is not prefixable
 %define	name	ctags
 %define version 5.8
-%define release %mkrel 3
+%define release %mkrel 4
 
 Summary:	Generates an index (or "tag") file for objects found in source files
 Name:		%{name}
