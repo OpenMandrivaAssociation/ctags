@@ -1,8 +1,8 @@
-Summary:	Generates an index (or "tag") file for objects found in source files
+Summary:	Generates an index file for objects found in source files
 Name:		ctags
 Epoch:		1
 Version:	5.8
-Release:	7
+Release:	8
 License:	GPL+
 Group:		Development/Other
 Url:		http://ctags.sourceforge.net/
@@ -23,7 +23,6 @@ a set of language files.
 %prep
 %setup -q
 %patch0 -p0
-# fix permission for $doc
 chmod a+r ctags.html
 
 %build
@@ -39,15 +38,15 @@ mv %{buildroot}/%{_bindir}/ctags %{buildroot}/%{_bindir}/exuberant-ctags
 mv %{buildroot}/%{_mandir}/man1/ctags.1 %{buildroot}/%{_mandir}/man1/exuberant-ctags.1
 
 %post
-update-alternatives --install %{_bindir}/ctags ctags %{_bindir}/exuberant-ctags 10 \
-                    --slave %{_mandir}/man1/ctags.1%{_extension} ctags.1%{_extension} %{_mandir}/man1/exuberant-ctags.1%{_extension}
+    update-alternatives --install %{_bindir}/ctags ctags %{_bindir}/exuberant-ctags 10 \
+        --slave %{_mandir}/man1/ctags.1%{_extension} ctags.1%{_extension} %{_mandir}/man1/exuberant-ctags.1%{_extension}
 
 %postun
-[ $1 = 0 ] || exit 0
-update-alternatives --remove ctags %{_bindir}/exuberant-ctags
+    if [ $1 = 0 ]; then
+        update-alternatives --remove ctags %{_bindir}/exuberant-ctags
+    fi
 
 %files
 %doc EXTENDING.html FAQ NEWS README ctags.html
 %{_bindir}/exuberant-ctags
 %{_mandir}/man1/exuberant-ctags.1*
-
