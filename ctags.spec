@@ -1,7 +1,7 @@
 Summary:	Generates an index (or "tag") file for objects found in source files
 Name:		ctags
 Version:	5.8
-Release:	6
+Release:	7
 License:	GPL+
 Group:		Development/Other
 Url:		http://ctags.sourceforge.net/
