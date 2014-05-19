@@ -46,17 +46,17 @@ chmod a+r ctags.html
 %install
 %makeinstall
 
-mv %{buildroot}/%{_bindir}/ctags %{buildroot}/%{_bindir}/exuberant-ctags
-mv %{buildroot}/%{_mandir}/man1/ctags.1 %{buildroot}/%{_mandir}/man1/exuberant-ctags.1
+mv %{buildroot}%{_bindir}/ctags %{buildroot}%{_bindir}/exuberant-ctags
+mv %{buildroot}%{_mandir}/man1/ctags.1 %{buildroot}%{_mandir}/man1/exuberant-ctags.1
 
 %post
-    update-alternatives --install %{_bindir}/ctags ctags %{_bindir}/exuberant-ctags 10 \
-        --slave %{_mandir}/man1/ctags.1%{_extension} ctags.1%{_extension} %{_mandir}/man1/exuberant-ctags.1%{_extension}
+update-alternatives --install %{_bindir}/ctags ctags %{_bindir}/exuberant-ctags 10 \
+	--slave %{_mandir}/man1/ctags.1%{_extension} ctags.1%{_extension} %{_mandir}/man1/exuberant-ctags.1%{_extension}
 
 %postun
-    if [ $1 = 0 ]; then
-        update-alternatives --remove ctags %{_bindir}/exuberant-ctags
-    fi
+if [ $1 = 0 ]; then
+	update-alternatives --remove ctags %{_bindir}/exuberant-ctags
+fi
 
 %files
 %doc EXTENDING.html FAQ NEWS README ctags.html
