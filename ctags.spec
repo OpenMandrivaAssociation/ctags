@@ -1,12 +1,18 @@
 Summary:	Generates an index file for objects found in source files
 Name:		ctags
 Version:	5.8
-Release:	12
+Release:	13
 License:	GPL+
 Group:		Development/Other
 Url:		http://ctags.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/ctags/%{name}-%{version}.tar.bz2
 Patch0:		ctags-5.7-fix-str-fmt.patch
+Patch1:		ctags-5.7-destdir.patch
+Patch2:		ctags-5.7-segment-fault.patch
+Patch3:		ctags-5.8-css.patch
+Patch4:		ctags-5.8-ocaml-crash.patch
+Patch5:		ctags-5.8-cssparse.patch
+Patch6:		ctags-5.8-memmove.patch
 
 %description
 The ctags program generate an index (or "tag") file for a variety of
@@ -22,6 +28,13 @@ a set of language files.
 %prep
 %setup -q
 %patch0 -p0
+%patch1 -p1 -b .destdir
+%patch2 -p1 -b .crash
+%patch3 -p1 -b .css-support
+%patch4 -p1 -b .ocaml-crash
+%patch5 -p1 -b .cssparse-crash
+%patch6 -p1 -b .memmove
+
 chmod a+r ctags.html
 
 %build
