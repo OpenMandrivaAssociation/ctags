@@ -1,5 +1,6 @@
 Summary:	Generates an index file for objects found in source files
 Name:		ctags
+Epoch:		1
 Version:	5.8
 Release:	15
 License:	GPL+
