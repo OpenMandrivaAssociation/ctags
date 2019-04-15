@@ -12,6 +12,8 @@ BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(jansson)
 BuildRequires:	pkgconfig(yaml-0.1)
 BuildRequires:	pkgconfig(libseccomp)
+# For man pages
+BuildRequires:	python-docutils
 
 %description
 The ctags program generate an index (or "tag") file for a variety of
