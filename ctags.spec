@@ -1,20 +1,17 @@
+%global _disable_rebuild_configure 1
+
 Summary:	Generates an index file for objects found in source files
 Name:		ctags
-Epoch:		1
-Version:	5.8
-Release:	20
+Version:	5.8.20190415
+Release:	1
 License:	GPL+
 Group:		Development/Other
-Url:		http://ctags.sourceforge.net/
-Source0:	http://prdownloads.sourceforge.net/ctags/%{name}-%{version}.tar.bz2
-Patch0:		ctags-5.7-fix-str-fmt.patch
-Patch1:		ctags-5.7-destdir.patch
-Patch2:		ctags-5.7-segment-fault.patch
-Patch3:		ctags-5.8-css.patch
-Patch4:		ctags-5.8-ocaml-crash.patch
-Patch5:		ctags-5.8-cssparse.patch
-Patch6:		ctags-5.8-memmove.patch
-Patch7:         ctags-CVE-2014-7204.patch
+Url:		https://ctags.io/
+Source0:	https://github.com/universal-ctags/ctags/archive/master.tar.gz
+BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:	pkgconfig(jansson)
+BuildRequires:	pkgconfig(yaml-0.1)
+BuildRequires:	pkgconfig(libseccomp)
 
 %description
 The ctags program generate an index (or "tag") file for a variety of
@@ -28,39 +25,21 @@ human readable form, information about the various source objects found in
 a set of language files.
 
 %prep
-%setup -q
-%patch0 -p0
-%patch1 -p1 -b .destdir
-%patch2 -p1 -b .crash
-%patch3 -p1 -b .css-support
-%patch4 -p1 -b .ocaml-crash
-%patch5 -p1 -b .cssparse-crash
-%patch6 -p1 -b .memmove
-
-chmod a+r ctags.html
+%setup -q -n ctags-master
+./autogen.sh
 
 %build
-%configure2_5x \
+%configure \
 	--disable-etags \
 	--enable-tmpdir=/tmp
 %make
 
 %install
-%makeinstall
-
-mv %{buildroot}%{_bindir}/ctags %{buildroot}%{_bindir}/exuberant-ctags
-mv %{buildroot}%{_mandir}/man1/ctags.1 %{buildroot}%{_mandir}/man1/exuberant-ctags.1
-
-%post
-update-alternatives --install %{_bindir}/ctags ctags %{_bindir}/exuberant-ctags 10 \
-	--slave %{_mandir}/man1/ctags.1%{_extension} ctags.1%{_extension} %{_mandir}/man1/exuberant-ctags.1%{_extension}
-
-%postun
-if [ $1 = 0 ]; then
-	update-alternatives --remove ctags %{_bindir}/exuberant-ctags
-fi
+%make_install
 
 %files
-%doc EXTENDING.html FAQ NEWS README ctags.html
-%{_bindir}/exuberant-ctags
-%{_mandir}/man1/exuberant-ctags.1*
+%{_bindir}/ctags
+%{_bindir}/readtags
+%{_mandir}/man1/ctags.1*
+%{_mandir}/man7/ctags-incompatibilities.7*
+%{_mandir}/man7/ctags-optlib.7*
