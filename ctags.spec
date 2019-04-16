@@ -11,7 +11,9 @@ Source0:	https://github.com/universal-ctags/ctags/archive/master.tar.gz
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(jansson)
 BuildRequires:	pkgconfig(yaml-0.1)
+%ifnarch riscv64
 BuildRequires:	pkgconfig(libseccomp)
+%endif
 # For man pages
 BuildRequires:	python-docutils
 
