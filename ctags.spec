@@ -2,8 +2,8 @@
 
 Summary:	Generates an index file for objects found in source files
 Name:		ctags
-Version:	6.0.0
-Release:	2
+Version:	6.1.0
+Release:	1
 License:	GPL+
 Group:		Development/Other
 Url:		https://ctags.io/
