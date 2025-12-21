@@ -8,6 +8,11 @@ License:	GPL+
 Group:		Development/Other
 Url:		https://ctags.io/
 Source0:	https://github.com/universal-ctags/ctags/archive/master.tar.gz
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(jansson)
 BuildRequires:	pkgconfig(yaml-0.1)
